@@ -13,7 +13,7 @@ show_key = true;
 show_female = true;
 show_cutout = true;
 show_button = true;
-is_button_pressed = true;
+is_button_pressed = false;
 button_angle = is_button_pressed ? -6 : 0;
 
 // Key
@@ -52,6 +52,7 @@ rotate([0, button_angle, 0]) {
     latch_button(
         button_width, button_length, button_thickness,
         button_axle_inner_diameter, button_axle_outer_diameter,
+        button_latch_length, button_latch_depth, button_latch_inner_diameter, button_latch_outer_diameter,
         hinge_length=button_hinge_length, hinge_skew=button_hinge_elevation,
     );
 };

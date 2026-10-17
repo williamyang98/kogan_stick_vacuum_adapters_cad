@@ -40,17 +40,13 @@ button_hinge_length = 10;
 button_hinge_elevation = 2.5;
 button_axle_inner_diameter = 2 + 0.25; // m.2 nut
 button_axle_outer_diameter = 5.25;
-button_clearance = 0.1;
-// derived parameters
-button_volume_height = button_thickness + button_hinge_elevation;
-button_lock_tab_length = (button_length - button_hinge_length)/2;
-button_press_tab_length = button_length - button_hinge_length - button_lock_tab_length;
+button_clearance = 0.2;
 
 
 // Latch for stick vacuum
 // measured parameters
 latch_insertion_clearance = 0.5;
-latch_insertion_depth = key_latch_length - latch_insertion_clearance;
+latch_insertion_depth = key_latch_length + latch_insertion_clearance;
 latch_insertion_cutout_width = key_latch_width + 0.5;
 latch_inner_diameter_clearance = 0.5;
 latch_inner_diameter = key_outer_diameter + latch_inner_diameter_clearance;
@@ -63,3 +59,12 @@ latch_lock_cutoff_length = 6;
 latch_insertion_height = (latch_outer_diameter-latch_inner_diameter)/2;
 latch_inner_length = key_inner_length;
 latch_outer_length = key_outer_length + key_notch_length - latch_lock_cutoff_length;
+
+// derived parameters
+button_volume_height = button_thickness + button_hinge_elevation;
+button_lock_tab_length = (button_length - button_hinge_length)/2;
+button_press_tab_length = button_length - button_hinge_length - button_lock_tab_length;
+button_latch_length = latch_lock_cutoff_length;
+button_latch_depth = button_clearance + (latch_outer_diameter - key_notch_diameter)/2 - button_clearance;
+button_latch_inner_diameter = key_notch_diameter + button_clearance;
+button_latch_outer_diameter = latch_outer_diameter + button_clearance;
