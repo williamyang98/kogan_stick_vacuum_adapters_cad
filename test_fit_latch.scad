@@ -24,9 +24,9 @@ union() {
 
 if (show_key) {
     male_connector(
-        key_inner_length, key_notch_length, key_outer_length, 
-        key_inner_diameter, key_outer_diameter, key_notch_diameter, key_wall_diameter,
-        key_latch_width, key_latch_length, 
+        male_inner_length, male_neck_length, male_outer_length, 
+        male_inner_diameter, male_outer_diameter, male_neck_diameter, male_wall_diameter,
+        male_notch_width, male_notch_length, 
     );
 };
 
@@ -34,11 +34,11 @@ if (show_key) {
 if (show_female) {
 color("red")
 female_connector(
-    latch_inner_length, latch_lock_cutoff_length, latch_outer_length,
-    latch_inner_diameter, latch_outer_diameter,
-    latch_insertion_cutout_width, latch_insertion_depth,
-    latch_lock_cutoff_width,
-    hole_clearance=button_clearance,
+    female_inner_length, female_hole_length, female_outer_length,
+    female_inner_diameter, female_outer_diameter,
+    female_notch_width, female_notch_length,
+    female_hole_width,
+    hole_clearance=button_to_female_clearance,
 );
 };
 
@@ -47,9 +47,9 @@ female_connector(
 if (show_button) {
 color("blue")
 translate([
-    latch_outer_diameter/2 + button_volume_height/2 + button_clearance,
+    female_outer_diameter/2 + button_total_height/2 + button_to_female_clearance,
     0,
-    key_inner_length + button_length/2,
+    male_inner_length + button_length/2,
 ]) { // center is the button pivot point
 rotate([0, button_angle, 0]) {
     latch_button(
@@ -66,14 +66,14 @@ rotate([0, button_angle, 0]) {
 if (show_enclosure) {
 color("orange")
 translate([
-    latch_outer_diameter/2 + button_volume_height/2 + button_clearance,
+    female_outer_diameter/2 + button_total_height/2 + button_to_female_clearance,
     0,
-    key_inner_length + button_length/2,
+    male_inner_length + button_length/2,
 ]) { // center is the button pivot point
     latch_button_enclosure(
         button_width, button_length, button_thickness,
         m2_inner_diameter, button_axle_outer_diameter, m2_head_diameter, m2_head_height,
-        button_clearance, button_enclosure_clearance, button_enclosure_thickness, latch_outer_diameter,
+        button_to_female_clearance, button_enclosure_clearance, button_enclosure_thickness, female_outer_diameter,
         hinge_length=button_hinge_length, hinge_skew=button_hinge_elevation,
     );
 };
@@ -82,6 +82,6 @@ translate([
 };
 
 if (show_cutout) {
-    cube([key_wall_diameter, key_wall_diameter, (key_length+key_latch_length)*10]);
+    cube([male_wall_diameter, male_wall_diameter, (male_length+male_notch_length)*10]);
 };
 };

@@ -14,17 +14,17 @@ show_adapter = true;
 show_button = true;
 
 bridge_length = 10;
-adapter_length = screw_length + bridge_length + latch_total_length;
+adapter_length = hose_length + bridge_length + female_length;
 
 // Screw
 if (show_adapter) {
     color("pink")
     rotate([0, 180, 0])
-    translate([0, 0, -screw_length]) {
+    translate([0, 0, -hose_length]) {
         hose_connector(
-            screw_length,
-            screw_inner_diameter, screw_outer_diameter,
-            screw_thickness, screw_pitch, screw_depth,
+            hose_length,
+            hose_inner_diameter, hose_outer_diameter,
+            hose_thread_thickness, hose_thread_pitch, hose_thread_depth,
             turn=0.35,
         );
     };
@@ -34,34 +34,34 @@ if (show_adapter) {
 // Bridge
 if (show_adapter) {
     color("green")
-    translate([0, 0, screw_length]) {
+    translate([0, 0, hose_length]) {
         difference() {
-            cylinder(bridge_length, d1=screw_outer_diameter, d2=latch_outer_diameter);
-            cylinder(bridge_length, d1=screw_inner_diameter, d2=key_inner_diameter);
+            cylinder(bridge_length, d1=hose_outer_diameter, d2=female_outer_diameter);
+            cylinder(bridge_length, d1=hose_inner_diameter, d2=male_inner_diameter);
         };
     };
 };
 
 
 // Female connector
-translate([0, 0, screw_length + bridge_length]) {
+translate([0, 0, hose_length + bridge_length]) {
     if (show_adapter) {
         color("red")
         female_connector(
-            latch_inner_length, latch_lock_cutoff_length, latch_outer_length,
-            latch_inner_diameter, latch_outer_diameter,
-            latch_insertion_cutout_width, latch_insertion_depth,
-            latch_lock_cutoff_width,
-            hole_clearance=button_clearance,
+            female_inner_length, female_hole_length, female_outer_length,
+            female_inner_diameter, female_outer_diameter,
+            female_notch_width, female_notch_length,
+            female_hole_width,
+            hole_clearance=button_to_female_clearance,
         );
     };
 
 
     // Button
     translate([
-        latch_outer_diameter/2 + button_volume_height/2 + button_clearance,
+        female_outer_diameter/2 + button_total_height/2 + button_to_female_clearance,
         0,
-        key_inner_length + button_length/2,
+        male_inner_length + button_length/2,
     ]) {
         if (show_button) {
             color("blue")
@@ -79,7 +79,7 @@ translate([0, 0, screw_length + bridge_length]) {
             latch_button_enclosure(
                 button_width, button_length, button_thickness,
                 m2_inner_diameter, button_axle_outer_diameter, m2_head_diameter, m2_head_height,
-                button_clearance, button_enclosure_clearance, button_enclosure_thickness, latch_outer_diameter,
+                button_to_female_clearance, button_enclosure_clearance, button_enclosure_thickness, female_outer_diameter,
                 hinge_length=button_hinge_length, hinge_skew=button_hinge_elevation,
             );
         };
