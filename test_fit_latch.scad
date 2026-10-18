@@ -27,6 +27,7 @@ if (show_key) {
         male_inner_length, male_neck_length, male_outer_length, 
         male_inner_diameter, male_outer_diameter, male_neck_diameter, male_wall_diameter,
         male_notch_width, male_notch_length, 
+        chamfer=connector_chamfer_width,
     );
 };
 
@@ -39,6 +40,7 @@ female_connector(
     female_notch_width, female_notch_length,
     female_hole_width,
     hole_clearance=button_to_female_clearance,
+    chamfer=connector_chamfer_width,
 );
 };
 

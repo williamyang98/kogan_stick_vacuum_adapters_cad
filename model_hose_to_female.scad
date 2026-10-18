@@ -26,6 +26,7 @@ if (show_adapter) {
             hose_inner_diameter, hose_outer_diameter,
             hose_thread_thickness, hose_thread_pitch, hose_thread_depth,
             turn=0.35,
+            chamfer=connector_chamfer_width,
         );
     };
 };
@@ -53,6 +54,7 @@ translate([0, 0, hose_length + bridge_length]) {
             female_notch_width, female_notch_length,
             female_hole_width,
             hole_clearance=button_to_female_clearance,
+            chamfer=connector_chamfer_width,
         );
     };
 

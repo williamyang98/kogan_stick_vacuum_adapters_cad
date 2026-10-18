@@ -6,6 +6,7 @@ module hose_connector(
     inner_diameter, outer_diameter,
     thread_thickness, thread_pitch, thread_depth,
     turn = 0.3,
+    chamfer = 0, 
 ) {
     tolerance = thread_depth*0.01;
     thread_z_offset = thread_thickness*turn;
@@ -24,6 +25,12 @@ module hose_connector(
         // inner chamfer for thread insertion direction
         translate([0, 0, thread_length-thread_thickness]) {
             cylinder(thread_thickness, d1=inner_diameter, d2=inner_diameter+thread_depth*2);
+        };
+        // outer chamfer for edge connection 
+        if (chamfer > 0) {
+            translate([0, 0, thread_length-chamfer]) {
+                bevelled_ring(chamfer, outer_diameter-2*chamfer, outer_diameter, flip=true);
+            };
         };
     };
 }
