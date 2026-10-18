@@ -63,6 +63,7 @@ latch_lock_cutoff_length = 6;
 latch_insertion_height = (latch_outer_diameter-latch_inner_diameter)/2;
 latch_inner_length = key_inner_length;
 latch_outer_length = key_outer_length + key_notch_length - latch_lock_cutoff_length;
+latch_total_length = latch_inner_length + latch_lock_cutoff_length + latch_outer_length;
 
 // derived parameters
 button_volume_height = button_thickness + button_hinge_elevation;

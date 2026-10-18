@@ -9,6 +9,7 @@ adapter_length = key_length + bridge_length + screw_length;
 
 
 // Key
+color("blue")
 difference() {
     male_connector(
         key_inner_length, key_notch_length, key_outer_length, 
@@ -21,6 +22,7 @@ difference() {
 
 
 // Bridge
+color("green")
 translate([0, 0, key_length]) {
     difference() {
         cylinder(bridge_length, d1=key_wall_diameter, d2=screw_outer_diameter);
@@ -31,6 +33,7 @@ translate([0, 0, key_length]) {
 
 
 // Screw
+color("pink")
 translate([0, 0, key_length+bridge_length]) {
     hose_connector(
         screw_length,

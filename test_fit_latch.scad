@@ -1,7 +1,7 @@
+// test file to check if parts fit correctly with sufficient tolerances
 include <measurements.scad>
 use <male_connector.scad>
 use <female_connector.scad>
-use <trapezoidal_prism.scad>
 use <latch_button.scad>
 use <latch_button_enclosure.scad>
 
@@ -12,7 +12,7 @@ $fn = 72; // fragment number for number of faces on axial objects
 
 show_key = true;
 show_female = true;
-show_cutout = false;
+show_cutout = true;
 show_button = true;
 show_enclosure = true;
 is_button_pressed = true;
@@ -82,6 +82,6 @@ translate([
 };
 
 if (show_cutout) {
-    cube([key_wall_diameter, key_wall_diameter, key_length+key_latch_length]);
+    cube([key_wall_diameter, key_wall_diameter, (key_length+key_latch_length)*10]);
 };
 };
