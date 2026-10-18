@@ -5,18 +5,17 @@ use <extra_math.scad>
 module latch_button_enclosure(
     button_width, button_length, button_depth,
     axle_inner_diameter, axle_outer_diameter, axle_insert_diameter, axle_insert_depth,
-    button_clearance, enclosure_clearance, enclosure_thickness, enclosure_outer_diameter,
+    button_clearance, enclosure_clearance,
+    enclosure_wall_thickness, enclosure_floor_thickness,
+    enclosure_outer_diameter,
     hinge_length = 0, hinge_skew = 0,
 ) {
     button_total_depth = button_depth + hinge_skew;
     
-    width = button_width + enclosure_clearance*2 + enclosure_thickness*2;
-    length = button_length + enclosure_clearance*2 + enclosure_thickness*2;
-    
     inner_width = button_width + enclosure_clearance*2;
-    outer_width = inner_width + enclosure_thickness*2;
+    outer_width = inner_width + enclosure_wall_thickness*2;
     inner_length = button_length + enclosure_clearance*2;
-    outer_length = inner_length + enclosure_thickness*2;
+    outer_length = inner_length + enclosure_wall_thickness*2;
     
     outer_press_tab_length = outer_length/2 - outer_width/2;
     outer_latch_tab_length = outer_length/2;
@@ -82,9 +81,9 @@ module latch_button_enclosure(
                     };
                 };
             };
-            // enclosure floor
+            // constrained enclosure floor
             intersection() {
-                // enclosure perimeter where floor is value
+                // enclosure perimeter to mask off out of perimeter wall geometry
                 union() {
                     translate([button_total_depth/2-depth, 0, 0]) {
                         // rounded button section
@@ -104,8 +103,14 @@ module latch_button_enclosure(
                         };
                     };
                 };
-                translate([-button_total_depth/2-button_clearance-enclosure_outer_diameter/2, 0, 0]) {
-                    cylinder(outer_length/2, d1=enclosure_outer_diameter, d2=enclosure_outer_diameter+button_depth*2);
+                // unconstrained enclosure floor 
+                difference() {
+                    // floor of enclosure with same thickness as walls
+                    translate([-button_total_depth/2-button_clearance-enclosure_outer_diameter/2, -outer_width/2, 0]) {
+                        cube([enclosure_outer_diameter/2+button_clearance+enclosure_floor_thickness, outer_width, outer_length/2]);
+                    };
+                    // remove cutout for hinge axle with clearance
+                    rotate([90,0,0]) cylinder(outer_width, d=axle_outer_diameter+enclosure_clearance*2, center=true);
                 };
             };
         };

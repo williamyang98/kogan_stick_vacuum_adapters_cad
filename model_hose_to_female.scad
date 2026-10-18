@@ -56,12 +56,12 @@ translate([0, 0, hose_length + bridge_length]) {
     };
 
 
-    // Button
     translate([
         female_outer_diameter/2 + button_total_height/2 + button_to_female_clearance,
         0,
         male_inner_length + button_length/2,
     ]) {
+        // Button
         if (show_button) {
             color("blue")
             latch_button(
@@ -72,13 +72,16 @@ translate([0, 0, hose_length + bridge_length]) {
                 hinge_length=button_hinge_length, hinge_skew=button_hinge_elevation,
             );
         };
-        
+
+        // Button enclosure 
         if (show_adapter) {
             color("orange")
             latch_button_enclosure(
                 button_width, button_length, button_thickness,
                 m2_inner_diameter, button_axle_outer_diameter, m2_head_diameter, m2_head_height,
-                button_to_female_clearance, button_enclosure_clearance, button_enclosure_thickness, female_outer_diameter,
+                button_to_female_clearance, button_enclosure_clearance,
+                button_enclosure_wall_thickness, button_enclosure_floor_thickness,
+                female_outer_diameter,
                 hinge_length=button_hinge_length, hinge_skew=button_hinge_elevation,
             );
         };

@@ -74,7 +74,9 @@ translate([
     latch_button_enclosure(
         button_width, button_length, button_thickness,
         m2_inner_diameter, button_axle_outer_diameter, m2_head_diameter, m2_head_height,
-        button_to_female_clearance, button_enclosure_clearance, button_enclosure_thickness, female_outer_diameter,
+        button_to_female_clearance, button_enclosure_clearance,
+        button_enclosure_wall_thickness, button_enclosure_floor_thickness,
+        female_outer_diameter,
         hinge_length=button_hinge_length, hinge_skew=button_hinge_elevation,
     );
 };

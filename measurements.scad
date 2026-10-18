@@ -5,16 +5,17 @@
 // Dimensional adjustments
 hose_thread_total_turns = 6;
 female_outer_diameter_reinforcement = 4;
-button_enclosure_screw_support_thickness = 1.5;
+button_enclosure_screw_support_wall_thickness = 1.5;
+button_enclosure_floor_thickness = 2;
 connector_chamfer_width = 0.5; // prevent connector edges from being sharp
 button_latch_length = 6;
 // Clearances and tolerances
 female_notch_length_clearance = 0.25;
 female_notch_width_clearance = 0.5;
 female_inner_diameter_clearance = 0.5;
-button_enclosure_clearance = 0.5; // perimeter around button
-button_to_female_clearance = 0.5;
-button_latch_clearance = 0.25;
+button_enclosure_clearance = 1; // perimeter around button
+button_to_female_clearance = 1;
+button_latch_clearance = 0.15;
 
 //// Measurements
 // M.2 thread
@@ -73,4 +74,4 @@ button_latch_inner_diameter = male_neck_diameter;
 button_latch_outer_diameter = female_outer_diameter;
 // Enclosure
 button_enclosure_depth = button_total_height + button_to_female_clearance*2;
-button_enclosure_thickness = m2_head_height + button_enclosure_screw_support_thickness;
+button_enclosure_wall_thickness = m2_head_height + button_enclosure_screw_support_wall_thickness;
