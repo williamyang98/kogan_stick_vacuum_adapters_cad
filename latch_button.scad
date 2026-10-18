@@ -1,4 +1,5 @@
 use <trapezoidal_prism.scad>
+use <extra_math.scad>
 
 // latch button which rotates around a hinge
 module latch_button(
@@ -13,43 +14,12 @@ module latch_button(
 ) {
     total_depth = depth + hinge_skew;
     tab_length = (length-hinge_length)/2;
+
     indent_width = indent_width_ratio*width;
     indent_depth = indent_depth_ratio*depth;
-    
-    // calculate radius r of sphere that will leave this indent of width w and depth d
-    // R = r - d
-    // r^2 = R^2 + (w/2)^2
-    // r^2 = r^2 - 2rd + d^2 + (w/2)^2
-    // 2rd = d^2 + w^2/4
-    // r = d/2 + w^2/8d
-    indent_radius = indent_depth/2 + indent_width^2/(8*indent_depth);
+    indent_radius = calculate_sphere_radius_from_indent(indent_width, indent_depth); 
 
-    // determine additional depth for latch to wrap around latch_inner_radius
-    // s^2 = (w/2)^2 + d^2
-    // s^2 = w^2/4 + d^2
-    // tan(theta) = d/(w/2) = 2d/w
-    // alpha = 90-theta
-    // 2*alpha + beta = 180
-    // 180-2*theta + beta = 180
-    // theta = beta/2
-    // tan(beta/2) = (s/2)/sqrt(r^2 - s^2/4) = s/sqrt(4r^2 - s^2)
-    // since tan(theta) = tan(beta/2)
-    // 2d/w = s/sqrt(4r^2 - s^2)
-    // 4d^2/w^2 = s^2/(4r^2 - s^2)
-    // 16 r^2 d^2 - 4 s^2 d^2 = w^2 s^2
-    // s^2 (w^2 + 4d^2) = 16 r^2 d^2
-    // s^2 = (16 r^2 d^2)/(w^2 + 4 d^2)
-    // substitute into pythag
-    // 16 r^2 d^2 = (w^2/4 + d^2) * (w^2 + 4d^2)
-    // 64 r^2 d^2 = (w^2 + 4d^2)^2
-    // 8rd = w^2 + 4d^2
-    // 4d^2 - 8rd + w^2 = 0
-    // d^2 - 2rd = -w^2/4
-    // d^2 - 2rd + r^2 - r^2 = -w^2/4
-    // (d-r)^2 = r^2 - w^2/4
-    // d = r - sqrt(r^2 - w^2/4) // take shorter distance
-    latch_inner_radius = latch_inner_diameter/2;
-    latch_overflow = latch_inner_radius - sqrt(max(latch_inner_radius^2 - (width^2)/4, 0));
+    latch_overflow = calculate_surface_overflow_onto_cylinder(latch_inner_diameter/2, width);
     latch_total_depth = latch_depth + latch_overflow;
     latch_flange_length = latch_flange_ratio*latch_length;
     

@@ -1,3 +1,5 @@
+use <pipes.scad>
+
 module female_connector(
     inner_length, hole_length, outer_length,
     inner_diameter, outer_diameter,
@@ -14,14 +16,13 @@ module female_connector(
     
     union() {
         difference() {
-            cylinder(total_length, d=outer_diameter);
-            cylinder(total_length, d=inner_diameter); // barrel
+            barrel(total_length, inner_diameter, outer_diameter);
             // notch cutout for male connector
             translate([inner_diameter/2 + wall_thickness/2, 0, total_length-notch_length/2]) {
                 cube([inner_diameter/2, notch_width, notch_length], center=true);
             };
-            // hole
-            translate([outer_diameter/2 + wall_thickness/2, 0, inner_length+hole_length/2]) { // hole
+            // hole for button latch
+            translate([outer_diameter/2 + wall_thickness/2, 0, inner_length+hole_length/2]) {
                 cube([outer_diameter/2, hole_width, hole_length], center=true);
             };
         };

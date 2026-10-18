@@ -16,7 +16,7 @@ show_button = true;
 bridge_length = 10;
 adapter_length = hose_length + bridge_length + female_length;
 
-// Screw
+// Hose
 if (show_adapter) {
     color("pink")
     rotate([0, 180, 0])

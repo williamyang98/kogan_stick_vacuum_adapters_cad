@@ -2,19 +2,20 @@
 //// Measurements are in millimeters (mm)
 
 //// Customisable
+// Dimensional adjustments
 hose_thread_total_turns = 6;
+female_outer_diameter_reinforcement = 1;
+button_enclosure_screw_support_thickness = 1.5;
+connector_chamfer_width = 0.5; // prevent connector edges from being sharp
 // Clearances and tolerances
 female_notch_length_clearance = 0.25;
 female_notch_width_clearance = 0.5;
 female_inner_diameter_clearance = 0.5;
-female_outer_diameter_reinforcement = 1;
 female_hole_width_clearance = 1;
 female_hole_length_clearance = 1;
 button_to_female_clearance = 0.5;
 button_latch_clearance = 0.25;
 button_enclosure_clearance = 0.5; // perimeter around button
-button_enclosure_screw_support_thickness = 1.5;
-
 
 //// Measurements
 // M.2 thread

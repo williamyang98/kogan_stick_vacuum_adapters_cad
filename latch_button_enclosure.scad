@@ -1,4 +1,5 @@
 use <trapezoidal_prism.scad>
+use <extra_math.scad>
 
 // latch button which rotates around a hinge
 module latch_button_enclosure(
@@ -20,33 +21,7 @@ module latch_button_enclosure(
     outer_press_tab_length = outer_length/2 - outer_width/2;
     outer_latch_tab_length = outer_length/2;
     
-    
-    // determine additional depth for latch to wrap around latch_inner_radius
-    // s^2 = (w/2)^2 + d^2
-    // s^2 = w^2/4 + d^2
-    // tan(theta) = d/(w/2) = 2d/w
-    // alpha = 90-theta
-    // 2*alpha + beta = 180
-    // 180-2*theta + beta = 180
-    // theta = beta/2
-    // tan(beta/2) = (s/2)/sqrt(r^2 - s^2/4) = s/sqrt(4r^2 - s^2)
-    // since tan(theta) = tan(beta/2)
-    // 2d/w = s/sqrt(4r^2 - s^2)
-    // 4d^2/w^2 = s^2/(4r^2 - s^2)
-    // 16 r^2 d^2 - 4 s^2 d^2 = w^2 s^2
-    // s^2 (w^2 + 4d^2) = 16 r^2 d^2
-    // s^2 = (16 r^2 d^2)/(w^2 + 4 d^2)
-    // substitute into pythag
-    // 16 r^2 d^2 = (w^2/4 + d^2) * (w^2 + 4d^2)
-    // 64 r^2 d^2 = (w^2 + 4d^2)^2
-    // 8rd = w^2 + 4d^2
-    // 4d^2 - 8rd + w^2 = 0
-    // d^2 - 2rd = -w^2/4
-    // d^2 - 2rd + r^2 - r^2 = -w^2/4
-    // (d-r)^2 = r^2 - w^2/4
-    // d = r - sqrt(r^2 - w^2/4) // take shorter distance
-    enclosure_outer_radius = enclosure_outer_diameter/2;
-    enclosure_overflow = enclosure_outer_radius - sqrt(max(enclosure_outer_radius^2 - (outer_width^2)/4, 0));
+    enclosure_overflow = calculate_surface_overflow_onto_cylinder(enclosure_outer_diameter/2, outer_width);
     depth = button_total_depth + enclosure_overflow + button_clearance;
     
     latch_tab_depth = enclosure_overflow + button_clearance + button_depth;
