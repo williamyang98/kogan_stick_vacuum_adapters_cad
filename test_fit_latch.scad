@@ -57,7 +57,7 @@ rotate([0, button_angle, 0]) {
         button_width, button_length, button_thickness,
         button_axle_inner_diameter, button_axle_outer_diameter,
         button_latch_length, button_latch_depth, button_latch_inner_diameter, button_latch_outer_diameter,
-        latch_clearance=button_latch_clearance,
+        latch_clearance=button_latch_to_male_clearance,
         hinge_length=button_hinge_length, hinge_skew=button_hinge_elevation,
     );
 };

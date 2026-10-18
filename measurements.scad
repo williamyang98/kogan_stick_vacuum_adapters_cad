@@ -13,9 +13,9 @@ button_latch_length = 6;
 female_notch_length_clearance = 0.25;
 female_notch_width_clearance = 0.5;
 female_inner_diameter_clearance = 0.5;
-button_enclosure_clearance = 1; // perimeter around button
-button_to_female_clearance = 1;
-button_latch_clearance = 0.15;
+button_enclosure_clearance = 0.5; // clearance around button
+button_to_female_clearance = 0.5;
+button_latch_to_male_clearance = 0.15; // allow some slack with button latch and male connector
 
 //// Measurements
 // M.2 thread
@@ -69,7 +69,7 @@ female_length = male_length;
 female_outer_length = female_length - female_inner_length - female_hole_length;
 // Button on female connection for latch
 button_total_height = button_thickness + button_hinge_elevation;
-button_latch_depth = button_to_female_clearance + (female_outer_diameter - male_neck_diameter)/2 - button_latch_clearance;
+button_latch_depth = button_to_female_clearance + (female_outer_diameter - male_neck_diameter)/2 - button_latch_to_male_clearance;
 button_latch_inner_diameter = male_neck_diameter;
 button_latch_outer_diameter = female_outer_diameter;
 // Enclosure
