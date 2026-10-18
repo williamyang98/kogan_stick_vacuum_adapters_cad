@@ -3,10 +3,7 @@ use <male_connector.scad>
 include <measurements.scad>
 
 $fn = 72*2; // fragment number for number of faces on axial objects
-
 bridge_length = 10;
-adapter_length = male_length + bridge_length + hose_length;
-
 
 // Key
 color("blue")

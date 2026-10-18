@@ -12,9 +12,7 @@ $fn = 72*2; // fragment number for number of faces on axial objects
 
 show_adapter = true;
 show_button = true;
-
 bridge_length = 10;
-adapter_length = hose_length + bridge_length + female_length;
 
 // Hose
 if (show_adapter) {
