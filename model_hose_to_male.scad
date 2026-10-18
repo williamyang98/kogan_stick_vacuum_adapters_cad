@@ -12,7 +12,7 @@ difference() {
         male_inner_length, male_neck_length, male_outer_length, 
         hose_inner_diameter, male_outer_diameter, male_neck_diameter, male_wall_diameter,
         male_notch_width, male_notch_length, 
-        chamfer=connector_chamfer_width,
+        edge_chamfer=connector_edge_chamfer_width,
     );
     cylinder(male_inner_length/2, d1=male_inner_diameter, d2=hose_inner_diameter); // match with screw and taper
 };
@@ -38,6 +38,6 @@ translate([0, 0, male_length+bridge_length]) {
         hose_inner_diameter, hose_outer_diameter,
         hose_thread_thickness, hose_thread_pitch, hose_thread_depth,
         turn=0.35,
-        chamfer=connector_chamfer_width,
+        edge_chamfer=connector_edge_chamfer_width,
     );
 };

@@ -7,7 +7,8 @@ hose_thread_total_turns = 6;
 female_outer_diameter_reinforcement = 4;
 button_enclosure_screw_support_wall_thickness = 1.5;
 button_enclosure_floor_thickness = 2;
-connector_chamfer_width = 0.5; // prevent connector edges from being sharp
+connector_edge_chamfer_width = 0.5; // prevent connector edges from being sharp
+female_hole_chamfer_length = 0.5; // allow button latch to swing easier
 button_latch_length = 6;
 // Clearances and tolerances
 female_notch_length_clearance = 0.25;

@@ -4,7 +4,7 @@ module male_connector(
     inner_length, neck_length, outer_length, 
     inner_diameter, outer_diameter, neck_diameter, notch_diameter,
     notch_width, notch_length, 
-    chamfer = 0,
+    edge_chamfer = 0,
 ) {
     total_length = inner_length + neck_length + outer_length;
     neck_depth = (outer_diameter-neck_diameter)/2;
@@ -20,9 +20,9 @@ module male_connector(
             translate([0, 0, inner_length+neck_length-neck_depth]) {
                 bevelled_ring(neck_depth, neck_diameter, outer_diameter);
             };
-            if (chamfer > 0) {
-                cylinder(chamfer, d1=inner_diameter+chamfer*2, d2=inner_diameter);
-                bevelled_ring(chamfer, outer_diameter-chamfer*2, outer_diameter);
+            if (edge_chamfer > 0) {
+                cylinder(edge_chamfer, d1=inner_diameter+edge_chamfer*2, d2=inner_diameter);
+                bevelled_ring(edge_chamfer, outer_diameter-edge_chamfer*2, outer_diameter);
             };
         };
         // notch
