@@ -39,7 +39,6 @@ female_connector(
     female_inner_diameter, female_outer_diameter,
     female_notch_width, female_notch_length,
     female_hole_width,
-    hole_clearance=button_to_female_clearance,
     chamfer=connector_chamfer_width,
 );
 };
