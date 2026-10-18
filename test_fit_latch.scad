@@ -15,7 +15,7 @@ show_female = true;
 show_cutout = true;
 show_button = true;
 show_enclosure = true;
-is_button_pressed = true;
+is_button_pressed = false;
 button_angle = is_button_pressed ? -6 : 0;
 
 // Key
