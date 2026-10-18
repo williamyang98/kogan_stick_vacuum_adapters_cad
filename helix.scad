@@ -1,7 +1,13 @@
 // Generate helix from cross section
-module helix(inner_radius, screw_depth, screw_height, pitch_height, helix_height, total_faces=$fn) {
-    degrees_step = 360/total_faces;
+module helix(
+    inner_radius, screw_depth, screw_height, pitch_height, helix_height,
+    clockwise=true, total_faces=$fn,
+) {
+    degrees_per_turn = 360;
+    degrees_step = degrees_per_turn/total_faces;
     total_steps = ceil(total_faces*helix_height/pitch_height);
+    // math notation means that positive theta is anticlockwise
+    theta_rotate_multiplier = clockwise ? -1 : 1;
     
     // square cross section
     cross_section = [
@@ -18,12 +24,13 @@ module helix(inner_radius, screw_depth, screw_height, pitch_height, helix_height
     // move to inner radius, rotate and elevate
     function transform_vertex(step, vertex_index) = let (
         theta = step * degrees_step,
+        rot_theta = theta * theta_rotate_multiplier,
         vertex = cross_section[vertex_index],
         x = vertex.x,
         y = vertex.y + inner_radius,
-        z = vertex.z + pitch_height*theta/360,
-        cos_theta = cos(theta),
-        sin_theta = sin(theta),
+        z = vertex.z + pitch_height*theta/degrees_per_turn,
+        cos_theta = cos(rot_theta),
+        sin_theta = sin(rot_theta),
         rot_x = x*cos_theta - y*sin_theta,
         rot_y = x*sin_theta + y*cos_theta,
     ) [rot_x, rot_y, z];
