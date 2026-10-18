@@ -4,7 +4,7 @@
 //// Customisable
 // Dimensional adjustments
 hose_thread_total_turns = 6;
-female_outer_diameter_reinforcement = 1;
+female_outer_diameter_reinforcement = 4;
 button_enclosure_screw_support_thickness = 1.5;
 connector_chamfer_width = 0.5; // prevent connector edges from being sharp
 button_latch_length = 6;
