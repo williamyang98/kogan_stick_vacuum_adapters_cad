@@ -4,6 +4,7 @@ use <female_connector.scad>
 use <latch_button.scad>
 use <latch_button_enclosure.scad>
 use <hose_connector.scad>
+use <revolute_joint.scad>
 
 // Hose adapter for stick vacuum
 // Measurements are in millimeters (mm)
@@ -41,9 +42,31 @@ if (show_adapter) {
     };
 };
 
+// Revolute joint
+if (show_adapter) {
+    color("yellow")
+    translate([0, 0, hose_length + bridge_length]) {
+        difference() {
+            revolute_joint(
+                male_inner_diameter, female_outer_diameter, revolute_length,
+                revolute_flange_radius, revolute_flange_length, revolute_flange_width,
+                revolute_flange_clearance,
+                flange_chamfer=revolute_flange_chamfer,
+            );
+            translate([0, 0, revolute_length-connector_edge_chamfer_width]) {
+                cylinder(
+                    connector_edge_chamfer_width, 
+                    d1=male_inner_diameter,
+                    d2=male_inner_diameter+2*connector_edge_chamfer_width,
+                );
+            };
+        };
+        
+    };
+}
 
 // Female connector
-translate([0, 0, hose_length + bridge_length]) {
+translate([0, 0, hose_length + bridge_length + revolute_length]) {
     if (show_adapter) {
         color("red")
         female_connector(
