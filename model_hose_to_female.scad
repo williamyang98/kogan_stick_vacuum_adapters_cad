@@ -5,6 +5,7 @@ use <latch_button.scad>
 use <latch_button_enclosure.scad>
 use <hose_connector.scad>
 use <rotary_union.scad>
+use <rotary_union_support.scad>
 
 // Hose adapter for stick vacuum
 // Measurements are in millimeters (mm)
@@ -64,6 +65,25 @@ if (show_adapter) {
         
     };
 }
+
+// Rotary union supports
+// NOTE: Must be rotated to 45 with the button facing upwards
+if (show_adapter) {
+    color("blue")
+    rotate([0, 0, 180]) // supports are on other side of button
+    translate([0, 0, hose_length + bridge_length]) {
+        for (angle = rotary_union_support_angles) {
+            rotate([0, 0, angle])
+            rotary_union_45_degree_support(
+                rotary_union_inner_diameter, rotary_union_outer_diameter, rotary_union_length,
+                rotary_union_flange_radius, rotary_union_flange_length, rotary_union_flange_width,
+                rotary_union_flange_clearance,
+                rotary_union_support_diameter,
+            );
+        };
+    };    
+}
+
 
 // Female connector
 translate([0, 0, hose_length + bridge_length + rotary_union_length]) {

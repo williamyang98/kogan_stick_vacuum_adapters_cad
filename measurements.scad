@@ -24,6 +24,13 @@ rotary_union_flange_length = 0.5;
 rotary_union_flange_width = 0.25;
 rotary_union_flange_clearance = 0.4; // corresponds to 0.4mm nozzle for printer for in print disjoint parts
 rotary_union_flange_chamfer = 0.25; // prevent hinge from snagging onto dust bunnies
+rotary_union_support_diameter = 0.8; // roughly two walls for 0.4mm nozzle
+// NOTE: This is for a rotary union angled at 45 degrees during printing
+// generous amount of support overhanging disjoint piece attached to rotary union
+// angles are not uniform because we rotated the piece 45 degrees
+// but we want supports on the most janky overhanging parts present at each horizontal slice
+rotary_union_support_angles = [0, -5, 5, -15, 15, -30, 30];
+
 
 //// Measurements
 // M.2 thread
