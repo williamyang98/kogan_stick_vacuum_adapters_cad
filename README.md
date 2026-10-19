@@ -8,6 +8,7 @@
 ![OpenSCAD model for hose to male](./docs/openscad_model_hose_to_male.png)
 ![OpenSCAD model for hose to female](./docs/openscad_model_hose_to_female.png)
 ![OpenSCAD test for male to female](./docs/openscad_test_female_male.png)
+![OpenSCAD test for revolute joint](./docs/openscad_test_revolute_joint.png)
 
 ### Elegoo Slicer
 ![Elegoo slicer for hose to male](./docs/elegoo_slicer_model_hose_to_male.png)
