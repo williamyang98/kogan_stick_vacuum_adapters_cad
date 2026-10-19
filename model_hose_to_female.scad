@@ -6,6 +6,7 @@ use <latch_button_enclosure.scad>
 use <hose_connector.scad>
 use <rotary_union.scad>
 use <rotary_union_support.scad>
+use <fin_support.scad>
 
 // Hose adapter for stick vacuum
 // Measurements are in millimeters (mm)
@@ -13,7 +14,7 @@ $fn = 72*2; // fragment number for number of faces on axial objects
 
 
 show_adapter = true;
-show_button = true;
+show_button = false;
 bridge_length = 10;
 
 // Hose
@@ -84,6 +85,33 @@ if (show_adapter) {
     };    
 }
 
+// Manual fin support base for rotary union and female connector which auto support from slicer can connect to
+// Makes sure that the first layer of the floating part of the rotary union has support underneath it
+if (show_adapter) {
+    color("blue")
+    let (
+        midpoint = hose_length + bridge_length + rotary_union_length/2,
+        flange_offset = rotary_union_flange_radius*2+rotary_union_flange_length+ rotary_union_flange_clearance,
+        embed_offset = 0.05,
+    )
+    // multiple fins to support very dangly underside that auto support refuses to connect to
+    for (angle = [0, -5, 5]) rotate([0, 0, angle])
+    translate([
+        -rotary_union_outer_diameter/2 + embed_offset,
+        0,
+        midpoint+flange_offset,
+    ]) {
+        rotate([0, -45, 180]) {
+            fin_support(
+                female_connector_to_rotary_union_fin_support_length,
+                female_connector_to_rotary_union_fin_support_height,
+                female_connector_to_rotary_union_fin_support_thickness,
+                female_connector_to_rotary_union_fin_support_base,
+                female_connector_to_rotary_union_fin_support_angle,
+            );
+        };        
+    };
+}
 
 // Female connector
 translate([0, 0, hose_length + bridge_length + rotary_union_length]) {

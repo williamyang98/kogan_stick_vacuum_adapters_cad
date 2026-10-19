@@ -3,6 +3,7 @@
 
 //// Customisable
 // Dimensional adjustments
+print_nozzle_diameter = 0.4;
 hose_thread_total_turns = 6;
 female_outer_diameter_reinforcement = 4;
 button_enclosure_screw_support_wall_thickness = 1.5;
@@ -22,14 +23,20 @@ rotary_union_length = 10;
 rotary_union_flange_radius = 0.75;
 rotary_union_flange_length = 0.5;
 rotary_union_flange_width = 0.25;
-rotary_union_flange_clearance = 0.4; // corresponds to 0.4mm nozzle for printer for in print disjoint parts
+rotary_union_flange_clearance = print_nozzle_diameter; // recommended clearance
 rotary_union_flange_chamfer = 0.25; // prevent hinge from snagging onto dust bunnies
-rotary_union_support_diameter = 0.8; // roughly two walls for 0.4mm nozzle
+rotary_union_support_diameter = 2*print_nozzle_diameter;
 // NOTE: This is for a rotary union angled at 45 degrees during printing
 // generous amount of support overhanging disjoint piece attached to rotary union
 // angles are not uniform because we rotated the piece 45 degrees
 // but we want supports on the most janky overhanging parts present at each horizontal slice
 rotary_union_support_angles = [0, -5, 5, -15, 15, -30, 30];
+// Another manual fin support for supporting and connecting the female connector and rotary union
+female_connector_to_rotary_union_fin_support_length = 5;
+female_connector_to_rotary_union_fin_support_height = 2;
+female_connector_to_rotary_union_fin_support_thickness = 2*print_nozzle_diameter;
+female_connector_to_rotary_union_fin_support_base = 5;
+female_connector_to_rotary_union_fin_support_angle = 45;
 
 
 //// Measurements
