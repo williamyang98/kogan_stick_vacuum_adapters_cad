@@ -13,7 +13,8 @@ module latch_button(
     indent_fn = $fn*2,
 ) {
     total_depth = depth + hinge_skew;
-    tab_length = (length-hinge_length)/2;
+    locking_tab_length = (length-hinge_length)/2; // connects to hinge
+    press_tab_length = length/2 - width/2; // connects to thickened hinge
 
     indent_width = indent_width_ratio*width;
     indent_depth = indent_depth_ratio*depth;
@@ -22,49 +23,63 @@ module latch_button(
     latch_overflow = calculate_surface_overflow_onto_cylinder(latch_inner_diameter/2, width);
     latch_total_depth = latch_depth + latch_overflow;
     latch_flange_length = latch_flange_ratio*latch_length;
+
+    hinge_angle =
+        (hinge_length == 0) ? 0 :
+        (hinge_skew == 0) ? 0 :
+        atan2(hinge_skew, hinge_length);
     
     difference() {
         union() {
             // create hinged button
             difference() {
                 union() {
-                    // lock, hinge and press tab body
-                    difference() {
-                        union() {
-                            // hinge body
-                            trapezoidal_prism(width, depth, hinge_length, hinge_skew);
-                            // locking tab that goes into hole
-                            translate([-total_depth/2 + depth/2, 0, -length/2 + tab_length/2]) {
-                                cube([depth, width, tab_length], center=true);
-                            };
-                            // press tab to release locking tab
-                            translate([total_depth/2 - depth/2, 0, length/2 - tab_length/2]) {
-                                // straight part that connects to rounded push section
-                                translate([0, 0, -width/4]) {
-                                    cube([depth, width, tab_length-width/2], center=true);
-                                };
-                                translate([-depth/2, 0, tab_length/2-width/2]) {
-                                    // half cylinder push tab section
-                                    rotate([0, 90, 0])
-                                    intersection() {
-                                        cylinder(depth, d=width);
-                                        translate([-width/4, 0, depth/2]) {
-                                            cube([width/2, width, depth], center=true);
-                                        };
-                                    };
-                                    
-                                };
+                    // hinge body
+                    trapezoidal_prism(width, depth, hinge_length, hinge_skew);
+                    // locking tab that goes into hole
+                    translate([-total_depth/2 + depth/2, 0, -length/2 + locking_tab_length/2]) {
+                        cube([depth, width, locking_tab_length], center=true);
+                    };
+                    // press tab straight part that connects to rounded push section
+                    translate([total_depth/2 - depth/2, 0, press_tab_length/2]) {
+                        cube([depth, width, press_tab_length], center=true);
+                    };
+                    // press tab rounded circle to release locking tab
+                    translate([total_depth/2 - depth, 0, length/2 - width/2]) {
+                        // half cylinder push tab section
+                        rotate([0, 90, 0])
+                        intersection() {
+                            cylinder(depth, d=width);
+                            translate([-width/4, 0, depth/2]) {
+                                cube([width/2, width, depth], center=true);
                             };
                         };
-                        // indent for press tab
-                        translate([total_depth/2 + indent_radius - indent_depth, 0, length/2 - width/2])
-                        sphere(r=indent_radius, $fn=indent_fn);
+                        
                     };
-                    // hinge axle
+                    // thin hinge axle on the bottom that has to have clearance with female connector
                     rotate([90, 0, 0]) cylinder(width, d=axle_outer_diameter, center=true);
+                    // thicken hinge axle on the top which is inline with the press button
+                    difference() {
+                        union() {
+                            // thickened axle
+                            rotate([90, 0, 0]) cylinder(width, d=total_depth, center=true);
+                            // make it perpendicular with lock tab
+                            translate([-total_depth/4, 0, -total_depth/4]) {
+                                cube([total_depth/2, width, total_depth/2], center=true);
+                            };
+                        };
+                        rotate([0, 90+hinge_angle, 0]) { // chop off half of the cylinder beneath hinge
+                            translate([0, 0, -total_depth]) {
+                                cube([total_depth*2, width, total_depth*2], center=true);
+                           };
+                        };
+                    };
                 };
                 // hinge axle bore hole
                 rotate([90,0,0]) cylinder(width, d=axle_inner_diameter, center=true);
+                // indent for press tab
+                translate([total_depth/2 + indent_radius - indent_depth, 0, length/2 - width/2])
+                sphere(r=indent_radius, $fn=indent_fn);
             };
             // create latch
             translate([-total_depth/2, 0, -length/2]) {
