@@ -1,13 +1,13 @@
-use <revolute_joint.scad>
+use <rotary_union.scad>
 include <measurements.scad>
 
 $fn = 72;
 
 difference() {
-    revolute_joint(
-        revolute_inner_diameter, revolute_outer_diameter, revolute_length,
-        revolute_flange_radius, revolute_flange_length, revolute_flange_width, revolute_flange_clearance,
-        flange_chamfer=revolute_flange_chamfer,
+    rotary_union(
+        rotary_union_inner_diameter, rotary_union_outer_diameter, rotary_union_length,
+        rotary_union_flange_radius, rotary_union_flange_length, rotary_union_flange_width, rotary_union_flange_clearance,
+        flange_chamfer=rotary_union_flange_chamfer,
     );
-    cube([revolute_outer_diameter, revolute_outer_diameter, revolute_length]);
+    cube([rotary_union_outer_diameter, rotary_union_outer_diameter, rotary_union_length]);
 }

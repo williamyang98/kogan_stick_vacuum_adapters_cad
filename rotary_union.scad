@@ -1,6 +1,8 @@
 use <pipes.scad>
 
-module revolute_joint(
+// https://www.youtube.com/watch?v=bADVKJlvvGc
+// Title: How do rotary unions work?
+module rotary_union(
     inner_diameter, outer_diameter, length,
     flange_radius, flange_length, flange_width, flange_clearance,
     flange_chamfer = 0,
@@ -26,8 +28,8 @@ module revolute_joint(
         flange_radius +
         flange_clearance;
         
-    assert(length > joint_length, "Barrel must be sufficiently long to house revolute joint");
-    assert(barrel_thickness > joint_width, "Barrel must be sufficiently thick to house revolute joint");
+    assert(length > joint_length, "Barrel must be sufficiently long to house rotary union");
+    assert(barrel_thickness > joint_width, "Barrel must be sufficiently thick to house rotary union");
     
     padding_length = length - joint_length;
     padding_width = barrel_thickness - joint_width;

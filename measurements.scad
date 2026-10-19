@@ -17,13 +17,13 @@ female_inner_diameter_clearance = 0.5;
 button_enclosure_clearance = 0.5; // clearance around button
 button_to_female_clearance = 0.5;
 button_latch_to_male_clearance = 0.15; // allow some slack with button latch and male connector
-// Revolute joint connection for female to male connector
-revolute_length = 10;
-revolute_flange_radius = 0.75;
-revolute_flange_length = 0.5;
-revolute_flange_width = 0.25;
-revolute_flange_clearance = 0.4; // corresponds to 0.4mm nozzle for printer for in print hinge
-revolute_flange_chamfer = 0.25; // prevent hinge from snagging onto dust bunnies
+// Rotary union connection for female to male connector
+rotary_union_length = 10;
+rotary_union_flange_radius = 0.75;
+rotary_union_flange_length = 0.5;
+rotary_union_flange_width = 0.25;
+rotary_union_flange_clearance = 0.4; // corresponds to 0.4mm nozzle for printer for in print disjoint parts
+rotary_union_flange_chamfer = 0.25; // prevent hinge from snagging onto dust bunnies
 
 //// Measurements
 // M.2 thread
@@ -83,6 +83,6 @@ button_latch_outer_diameter = female_outer_diameter;
 // Enclosure
 button_enclosure_depth = button_total_height + button_to_female_clearance*2;
 button_enclosure_wall_thickness = m2_head_height + button_enclosure_screw_support_wall_thickness;
-// Revolute joint for female to male connector
-revolute_inner_diameter = male_inner_diameter;
-revolute_outer_diameter = female_outer_diameter;
+// Rotary union for female to male connector
+rotary_union_inner_diameter = male_inner_diameter;
+rotary_union_outer_diameter = female_outer_diameter;
