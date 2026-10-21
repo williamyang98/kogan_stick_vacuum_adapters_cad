@@ -1,7 +1,7 @@
 // Generate helix from cross section
 module helix(
     inner_radius, screw_depth, screw_height, pitch_height, helix_height,
-    clockwise=true, total_faces=$fn,
+    clockwise=true, taper=0, total_faces=$fn,
 ) {
     degrees_per_turn = 360;
     degrees_step = degrees_per_turn/total_faces;
@@ -11,10 +11,10 @@ module helix(
     
     // square cross section
     cross_section = [
-        [0, 0, 0], // inner-bottom
+        [0, 0, taper/2], // inner-bottom
         [0, screw_depth, 0], // outer-bottom
         [0, screw_depth, screw_height], // outer-top
-        [0, 0, screw_height], // inner-top
+        [0, 0, screw_height-taper/2], // inner-top
     ];
     INNER_BOT = 0;
     OUTER_BOT = 1;

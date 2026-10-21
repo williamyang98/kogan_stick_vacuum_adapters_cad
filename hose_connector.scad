@@ -5,8 +5,9 @@ module hose_connector(
     thread_length,
     inner_diameter, outer_diameter,
     thread_thickness, thread_pitch, thread_depth,
+    thread_taper = 0,
     turn = 0.3,
-    edge_chamfer = 0, 
+    edge_chamfer = 0,
 ) {
     tolerance = thread_depth*0.01;
     thread_z_offset = thread_thickness*turn;
@@ -20,6 +21,7 @@ module hose_connector(
                 thread_thickness,
                 thread_pitch,
                 thread_length,
+                taper=thread_taper,
             );
         };
         // inner chamfer for thread insertion direction
