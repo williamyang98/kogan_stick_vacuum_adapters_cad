@@ -37,6 +37,13 @@ female_connector_to_rotary_union_fin_support_height = 2;
 female_connector_to_rotary_union_fin_support_thickness = 2*print_nozzle_diameter;
 female_connector_to_rotary_union_fin_support_base = 5;
 female_connector_to_rotary_union_fin_support_angle = 45;
+// Manual fin support for supporting male/female connector base
+connector_base_fin_support_length = 10;
+connector_base_fin_support_height = 5;
+connector_base_fin_support_thickness = 2;
+connector_base_fin_support_base = 20;
+connector_base_fin_support_angle = 45;
+
 
 
 //// Measurements
@@ -56,11 +63,12 @@ male_notch_width = 3;
 male_notch_length = 4;
 // Hose
 hose_thread_thickness = 2.5;
+hose_thread_taper = 1; // Add thread taper inner wall of thread to prevent scratching of hose
 hose_thread_pitch = 4.5;
-hose_thread_depth = 3-1; // 3mm thickness for entire hose, 1mm for membrane connecting threads
+hose_thread_depth = 3-1.25; // 3mm thickness for entire hose, 1.25mm for membrane connecting threads
 // hose_outer_diameter = 33;
 hose_outer_diameter = male_wall_diameter; // make it extra thicc
-hose_inner_diameter = 26;
+hose_inner_diameter = 26+1; // 1mm of extra clearance for less tight fit
 // Button on female connection for latch
 button_length = 32;
 button_width = 15;

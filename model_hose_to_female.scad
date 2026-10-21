@@ -28,6 +28,22 @@ if (show_adapter) {
             hose_thread_thickness, hose_thread_pitch, hose_thread_depth,
             turn=0.35,
             edge_chamfer=connector_edge_chamfer_width,
+            thread_taper=-hose_thread_taper,
+        );
+    };
+};
+
+// Fin support for hose to prevent vibrating off during early print
+if (show_adapter) {
+    color("orange")
+    translate([-hose_outer_diameter/2, 0, hose_length/2])
+    rotate([0, -45, 180]) {
+        fin_support(
+            connector_base_fin_support_length,
+            connector_base_fin_support_height,
+            connector_base_fin_support_thickness,
+            connector_base_fin_support_base,
+            connector_base_fin_support_angle,
         );
     };
 };
@@ -112,6 +128,25 @@ if (show_adapter) {
         };        
     };
 }
+
+// Manual cylindrical supports to connect both halves of the rotary union
+if (show_adapter) {
+    color("blue")
+    let (
+        total_angles = 16,
+        delta_theta = 360/total_angles,
+        support_diameter = female_connector_to_rotary_union_fin_support_thickness,
+    )
+    for (support_index = [0:total_angles])
+    let (angle = support_index*delta_theta)
+    rotate([0, 0, angle])
+    translate([
+        rotary_union_outer_diameter/2 - support_diameter/2,
+        0,
+        hose_length + bridge_length,
+    ])
+    cylinder(rotary_union_length, d=support_diameter);
+};
 
 // Female connector
 translate([0, 0, hose_length + bridge_length + rotary_union_length]) {
