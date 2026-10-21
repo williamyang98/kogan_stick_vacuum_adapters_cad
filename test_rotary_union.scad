@@ -6,6 +6,9 @@ $fn = 72;
 show_rotary_union = true;
 show_supports = true;
 
+rotary_union_inner_diameter = male_inner_diameter;
+rotary_union_outer_diameter = female_outer_diameter;
+
 difference() {
 
 union() {

@@ -45,7 +45,6 @@ connector_base_fin_support_base = 20;
 connector_base_fin_support_angle = 45;
 
 
-
 //// Measurements
 // M.2 thread
 m2_inner_diameter = 2;
@@ -63,7 +62,7 @@ male_notch_width = 3;
 male_notch_length = 4;
 // Hose
 hose_thread_thickness = 2.5;
-hose_thread_taper = 1; // Add thread taper inner wall of thread to prevent scratching of hose
+hose_thread_taper = 0.5; // Add thread taper inner wall of thread to prevent scratching of hose
 hose_thread_pitch = 4.5;
 hose_thread_depth = 3-1.25; // 3mm thickness for entire hose, 1.25mm for membrane connecting threads
 // hose_outer_diameter = 33;
@@ -105,6 +104,3 @@ button_latch_outer_diameter = female_outer_diameter;
 // Enclosure
 button_enclosure_depth = button_total_height + button_to_female_clearance*2;
 button_enclosure_wall_thickness = m2_head_height + button_enclosure_screw_support_wall_thickness;
-// Rotary union for female to male connector
-rotary_union_inner_diameter = male_inner_diameter;
-rotary_union_outer_diameter = female_outer_diameter;

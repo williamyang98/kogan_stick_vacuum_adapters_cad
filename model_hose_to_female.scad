@@ -17,6 +17,10 @@ show_adapter = true;
 show_button = false;
 bridge_length = 10;
 
+// Rotary union for female to male connector
+rotary_union_inner_diameter = male_inner_diameter;
+rotary_union_outer_diameter = female_outer_diameter;
+
 // Hose
 if (show_adapter) {
     color("pink")
@@ -66,7 +70,7 @@ if (show_adapter) {
     translate([0, 0, hose_length + bridge_length]) {
         difference() {
             rotary_union(
-                male_inner_diameter, female_outer_diameter, rotary_union_length,
+                rotary_union_inner_diameter, rotary_union_outer_diameter, rotary_union_length,
                 rotary_union_flange_radius, rotary_union_flange_length, rotary_union_flange_width,
                 rotary_union_flange_clearance,
                 flange_chamfer=rotary_union_flange_chamfer,
